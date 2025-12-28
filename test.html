@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawcare - Pet Grooming Template Clone</title>
+    
+    <!-- Google Fonts: Manrope (Orijinal tasarımdaki fonta çok yakın) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config - Orijinal Renk Paleti -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Manrope', 'sans-serif'],
+                    },
+                    colors: {
+                        'paw-orange': '#FF5B3E',      // Orijinal buton/vurgu rengi
+                        'paw-orange-hover': '#E64A2E',
+                        'paw-bg': '#FFFBF6',          // Orijinal krem arka plan
+                        'paw-dark': '#1D1D1F',        // Ana metin rengi
+                        'paw-gray': '#666666',        // İkincil metin rengi
+                        'paw-light-gray': '#F4F2ED',  // Kart arka planları
+                        'paw-border': '#EAE8E3'
+                    },
+                    borderRadius: {
+                        'xl': '1.5rem',
+                        '2xl': '2rem',
+                        '3xl': '3rem',
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(0,0,0,0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Özel Blob Şekilleri ve Animasyonlar */
+        .blob-shape {
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            transition: all 0.5s ease;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #FF5B3E;
+            transition: width 0.3s;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="font-sans text-paw-dark bg-paw-bg antialiased selection:bg-paw-orange selection:text-white">
+
+    <!-- NAVBAR -->
+    <nav class="fixed w-full z-50 bg-paw-bg/90 backdrop-blur-md border-b border-paw-border transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
+                    <div class="w-10 h-10 bg-paw-orange rounded-full flex items-center justify-center text-white text-xl">
+                        <i class="fa-solid fa-paw"></i>
+                    </div>
+                    <span class="font-extrabold text-2xl tracking-tight">Pawcare</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#" class="nav-link font-semibold text-paw-dark hover:text-paw-orange transition">Home</a>
+                    <a href="#" class="nav-link font-semibold text-paw-dark hover:text-paw-orange transition">About</a>
+                    <a href="#" class="nav-link font-semibold text-paw-dark hover:text-paw-orange transition">Services</a>
+                    <a href="#" class="nav-link font-semibold text-paw-dark hover:text-paw-orange transition">Pages</a>
+                    <a href="#" class="nav-link font-semibold text-paw-dark hover:text-paw-orange transition">Cart (0)</a>
+                </div>
+
+                <!-- CTA Button -->
+                <div class="hidden md:flex">
+                    <a href="#contact" class="bg-paw-dark text-white px-6 py-3 rounded-full font-bold hover:bg-paw-orange transition duration-300 transform hover:-translate-y-1 shadow-lg">
+                        Get in touch
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button class="text-paw-dark hover:text-paw-orange focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden relative">
+        <!-- Arka plan dekoratif şekiller -->
+        <div class="absolute top-20 right-0 w-1/2 h-full bg-orange-50/50 rounded-l-3xl -z-10"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                
+                <!-- Sol Taraf: İçerik -->
+                <div class="space-y-8 text-center lg:text-left animate-fade-in-up">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-paw-border shadow-sm">
+                        <i class="fa-solid fa-star text-yellow-400 text-sm"></i>
+                        <span class="text-sm font-bold text-paw-dark">4.9 reviews from testimonials</span>
+                    </div>
+                    
+                    <h1 class="text-5xl lg:text-7xl font-extrabold leading-[1.1] text-paw-dark">
+                        Pet grooming services in <span class="text-paw-orange">New York</span>
+                    </h1>
+                    
+                    <p class="text-lg text-paw-gray leading-relaxed max-w-lg mx-auto lg:mx-0">
+                        Sit id ac elit quis condimentum morbi proin massa nulla urna vel at vel adipiscing sed varius elit libero suspendisse nam curabitur.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6 pt-4">
+                        <a href="#" class="bg-paw-orange text-white px-8 py-4 rounded-full font-bold hover:bg-paw-dark transition duration-300 shadow-soft text-lg flex items-center gap-3">
+                            Book Appointment
+                        </a>
+                        
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-md text-paw-orange">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div class="text-left">
+                                <div class="text-sm text-paw-gray font-medium">Call us</div>
+                                <div class="font-bold text-paw-dark">(315) 512 - 2460</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sağ Taraf: Görsel -->
+                <div class="relative">
+                    <!-- Dekoratif Blob Arka Plan -->
+                    <div class="absolute inset-0 bg-paw-orange opacity-10 blob-shape transform rotate-6 scale-105"></div>
+                    
+                    <div class="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-4 border-white transform rotate-2 hover:rotate-0 transition duration-500">
+                        <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?q=80&w=1000&auto=format&fit=crop" alt="Happy Dog Grooming" class="w-full h-full object-cover aspect-[4/5]">
+                        
+                        <!-- Floating Badge -->
+                        <div class="absolute bottom-8 left-8 bg-white p-4 rounded-2xl shadow-xl flex items-center gap-4 max-w-[200px]">
+                            <div class="bg-green-100 p-3 rounded-full text-green-600">
+                                <i class="fa-solid fa-scissors"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-paw-dark">Expert Care</div>
+                                <div class="text-xs text-paw-gray">Certified Groomers</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-4xl lg:text-5xl font-extrabold mb-6">We offer a wide range of services</h2>
+                <p class="text-paw-gray text-lg">Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-paw-bg rounded-3xl p-8 hover:bg-white hover:shadow-xl transition-all duration-300 border border-transparent hover:border-paw-border group cursor-pointer">
+                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-3xl text-paw-orange mb-6 shadow-sm group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-bath"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Bathing and drying</h3>
+                    <p class="text-paw-gray leading-relaxed">Tortor ultricies nullam auctor ut a nunc lacus tempor tellus elementum dui morbi.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-paw-bg rounded-3xl p-8 hover:bg-white hover:shadow-xl transition-all duration-300 border border-transparent hover:border-paw-border group cursor-pointer">
+                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-3xl text-paw-orange mb-6 shadow-sm group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-scissors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Haircut and styling</h3>
+                    <p class="text-paw-gray leading-relaxed">Ut at egestas quis sagittis ultrices tempor risus eget mattis ultricies pellentesque.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-paw-bg rounded-3xl p-8 hover:bg-white hover:shadow-xl transition-all duration-300 border border-transparent hover:border-paw-border group cursor-pointer">
+                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-3xl text-paw-orange mb-6 shadow-sm group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-paw"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Nail trimming</h3>
+                    <p class="text-paw-gray leading-relaxed">Sit id ac elit quis condimentum morbi proinolm massa nulla urna vel at vel consector.</p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="bg-paw-bg rounded-3xl p-8 hover:bg-white hover:shadow-xl transition-all duration-300 border border-transparent hover:border-paw-border group cursor-pointer">
+                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-3xl text-paw-orange mb-6 shadow-sm group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-tooth"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Teeth brushing</h3>
+                    <p class="text-paw-gray leading-relaxed">Luctus ligula neque pulvinar dolor proin labore ultricies facilisi sit donec diam.</p>
+                </div>
+            </div>
+
+            <div class="mt-16 text-center">
+                <a href="#" class="inline-flex items-center justify-center gap-2 text-paw-dark font-bold hover:text-paw-orange transition group">
+                    Browse all services
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section class="py-24 bg-paw-bg overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                
+                <!-- Image Grid -->
+                <div class="grid grid-cols-2 gap-4 relative">
+                    <img src="https://images.unsplash.com/photo-1585079542156-2755d9c8a094?q=80&w=500&auto=format&fit=crop" class="rounded-2xl w-full h-64 object-cover translate-y-8">
+                    <img src="https://images.unsplash.com/photo-1598133894008-61f7fdb8cc3a?q=80&w=500&auto=format&fit=crop" class="rounded-2xl w-full h-64 object-cover">
+                    <img src="https://images.unsplash.com/photo-1535090467336-9501f96eef89?q=80&w=500&auto=format&fit=crop" class="rounded-2xl w-full h-64 object-cover translate-y-8">
+                    <img src="https://images.unsplash.com/photo-1516371535707-512a1e83bb9a?q=80&w=500&auto=format&fit=crop" class="rounded-2xl w-full h-64 object-cover">
+                    
+                    <!-- Center Badge -->
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-paw-orange text-white p-6 rounded-full shadow-xl text-center w-32 h-32 flex flex-col items-center justify-center border-4 border-white">
+                        <span class="text-3xl font-bold">10+</span>
+                        <span class="text-xs font-medium">Years Exp.</span>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div>
+                    <h2 class="text-4xl lg:text-5xl font-extrabold mb-6">Why you should choose our services?</h2>
+                    <p class="text-paw-gray text-lg mb-10">Sit id ac elit quis condimentum morbi proin massa nulla urna vel at Vel adipiscing sed varius elit libero.</p>
+
+                    <div class="space-y-8">
+                        <!-- Feature Item -->
+                        <div class="flex gap-6">
+                            <div class="w-14 h-14 rounded-full bg-white flex-shrink-0 flex items-center justify-center text-paw-orange shadow-sm border border-paw-border">
+                                <i class="fa-solid fa-user-graduate text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">Experienced groomers</h4>
+                                <p class="text-paw-gray">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            </div>
+                        </div>
+
+                        <!-- Feature Item -->
+                        <div class="flex gap-6">
+                            <div class="w-14 h-14 rounded-full bg-white flex-shrink-0 flex items-center justify-center text-paw-orange shadow-sm border border-paw-border">
+                                <i class="fa-solid fa-heart text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">Stress-free environment</h4>
+                                <p class="text-paw-gray">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            </div>
+                        </div>
+
+                        <!-- Feature Item -->
+                        <div class="flex gap-6">
+                            <div class="w-14 h-14 rounded-full bg-white flex-shrink-0 flex items-center justify-center text-paw-orange shadow-sm border border-paw-border">
+                                <i class="fa-solid fa-bottle-droplet text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">High-quality products</h4>
+                                <p class="text-paw-gray">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEAM SECTION (REPLACES VISIT OUR PET SALON) -->
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-4xl lg:text-5xl font-extrabold mb-6">Meet our expert team</h2>
+                <p class="text-paw-gray text-lg">Dedicated professionals committed to the health and happiness of your beloved pets.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Team Member 1 -->
+                <div class="group text-center">
+                    <div class="relative mb-6 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                        <img src="https://images.unsplash.com/photo-1559839734-2b71ea86b48e?q=80&w=800&auto=format&fit=crop" alt="Dr. Sarah Wilson" class="w-full aspect-[3/4] object-cover transform group-hover:scale-105 transition duration-500">
+                        <!-- Social Overlay -->
+                        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-3 opacity-0 group-hover:opacity-100 transition duration-300 translate-y-4 group-hover:translate-y-0">
+                            <a href="#" class="w-10 h-10 bg-white text-paw-orange rounded-full flex items-center justify-center hover:bg-paw-orange hover:text-white transition shadow-lg"><i class="fa-brands fa-linkedin-in"></i></a>
+                            <a href="#" class="w-10 h-10 bg-white text-paw-orange rounded-full flex items-center justify-center hover:bg-paw-orange hover:text-white transition shadow-lg"><i class="fa-brands fa-twitter"></i></a>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-1">Dr. Sarah Wilson</h3>
+                    <p class="text-paw-orange font-bold text-sm uppercase tracking-wider mb-3">Senior Veterinarian</p>
+                    <p class="text-paw-gray text-sm px-4 leading-relaxed">Specializes in internal medicine and surgery with over 10 years of experience in pet care.</p>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="group text-center">
+                    <div class="relative mb-6 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                        <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=800&auto=format&fit=crop" alt="Dr. Michael Brown" class="w-full aspect-[3/4] object-cover transform group-hover:scale-105 transition duration-500">
+                         <!-- Social Overlay -->
+                        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-3 opacity-0 group-hover:opacity-100 transition duration-300 translate-y-4 group-hover:translate-y-0">
+                            <a href="#" class="w-10 h-10 bg-white text-paw-orange rounded-full flex items-center justify-center hover:bg-paw-orange hover:text-white transition shadow-lg"><i class="fa-brands fa-linkedin-in"></i></a>
+                            <a href="#" class="w-10 h-10 bg-white text-paw-orange rounded-full flex items-center justify-center hover:bg-paw-orange hover:text-white transition shadow-lg"><i class="fa-brands fa-facebook-f"></i></a>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-1">Dr. Michael Brown</h3>
+                    <p class="text-paw-orange font-bold text-sm uppercase tracking-wider mb-3">Veterinary Surgeon</p>
+                    <p class="text-paw-gray text-sm px-4 leading-relaxed">Expert in orthopedic surgery and compassionate emergency care for all animals.</p>
+                </div>
+
+                <!-- Team Member 3 -->
+                 <div class="group text-center">
+                    <div class="relative mb-6 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                        <img src="https://images.unsplash.com/photo-1594824476969-513a7e02cc3d?q=80&w=800&auto=format&fit=crop" alt="Emily Davis" class="w-full aspect-[3/4] object-cover transform group-hover:scale-105 transition duration-500">
+                         <!-- Social Overlay -->
+                        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-3 opacity-0 group-hover:opacity-100 transition duration-300 translate-y-4 group-hover:translate-y-0">
+                            <a href="#" class="w-10 h-10 bg-white text-paw-orange rounded-full flex items-center justify-center hover:bg-paw-orange hover:text-white transition shadow-lg"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#" class="w-10 h-10 bg-white text-paw-orange rounded-full flex items-center justify-center hover:bg-paw-orange hover:text-white transition shadow-lg"><i class="fa-brands fa-tiktok"></i></a>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-1">Emily Davis</h3>
+                    <p class="text-paw-orange font-bold text-sm uppercase tracking-wider mb-3">Head Groomer</p>
+                    <p class="text-paw-gray text-sm px-4 leading-relaxed">Passionate about making your pets look and feel their absolute best with gentle care.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl lg:text-5xl font-extrabold mb-16 text-center">What pet owners say</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-paw-bg p-10 rounded-3xl relative">
+                    <i class="fa-solid fa-quote-right text-4xl text-paw-orange opacity-20 absolute top-10 right-10"></i>
+                    <div class="flex items-center gap-4 mb-6">
+                         <div class="flex text-yellow-400 text-sm">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-6 leading-tight">"Wonderful service, so kind and patient with my shy pup."</h3>
+                    <div class="flex items-center gap-4">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="w-12 h-12 rounded-full">
+                        <div>
+                            <div class="font-bold text-paw-dark">John Carter</div>
+                            <div class="text-sm text-paw-gray">San Francisco, CA</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-paw-bg p-10 rounded-3xl relative">
+                    <i class="fa-solid fa-quote-right text-4xl text-paw-orange opacity-20 absolute top-10 right-10"></i>
+                    <div class="flex items-center gap-4 mb-6">
+                         <div class="flex text-yellow-400 text-sm">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-6 leading-tight">"Pawcare leaves my kitty looking fabulous every time!"</h3>
+                    <div class="flex items-center gap-4">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="w-12 h-12 rounded-full">
+                        <div>
+                            <div class="font-bold text-paw-dark">Lilly Green</div>
+                            <div class="text-sm text-paw-gray">San Francisco, CA</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- APPOINTMENT / CTA SECTION -->
+    <section class="py-24 bg-paw-bg" id="contact">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-paw-dark text-white rounded-3xl p-8 lg:p-16 overflow-hidden relative">
+                <!-- Decorative Circles -->
+                <div class="absolute -top-20 -right-20 w-64 h-64 bg-paw-orange rounded-full opacity-20 blur-3xl"></div>
+                <div class="absolute bottom-0 left-0 w-48 h-48 bg-paw-orange rounded-full opacity-10 blur-2xl"></div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 relative z-10">
+                    <div>
+                        <h2 class="text-4xl lg:text-5xl font-extrabold mb-6">Get an appointment</h2>
+                        <p class="text-gray-400 text-lg mb-10">Ut enim ad minim veniam quis nostrud exercitation laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-circle-check text-paw-orange"></i>
+                                <span class="font-medium">10+ Professional groomers available</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-circle-check text-paw-orange"></i>
+                                <span class="font-medium">Book your first grooming session for free</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-circle-check text-paw-orange"></i>
+                                <span class="font-medium">Same-Day appointments available</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white text-paw-dark rounded-2xl p-8">
+                        <form class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-bold mb-2">Name</label>
+                                    <input type="text" placeholder="John Doe" class="w-full bg-paw-light-gray border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-paw-orange outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold mb-2">Email</label>
+                                    <input type="email" placeholder="email@example.com" class="w-full bg-paw-light-gray border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-paw-orange outline-none">
+                                </div>
+                            </div>
+                             <div>
+                                <label class="block text-sm font-bold mb-2">Phone</label>
+                                <input type="tel" placeholder="(123) 456 - 7890" class="w-full bg-paw-light-gray border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-paw-orange outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold mb-2">Service</label>
+                                <select class="w-full bg-paw-light-gray border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-paw-orange outline-none">
+                                    <option>Bathing and Drying</option>
+                                    <option>Haircut and Styling</option>
+                                    <option>Nail Trimming</option>
+                                </select>
+                            </div>
+                            <button type="button" class="w-full bg-paw-orange text-white font-bold py-4 rounded-lg hover:bg-paw-dark transition duration-300 mt-4">
+                                Schedule Appointment
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-white pt-20 pb-10 border-t border-paw-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
+                <!-- Brand -->
+                <div class="space-y-6">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-paw-orange rounded-full flex items-center justify-center text-white">
+                            <i class="fa-solid fa-paw text-xs"></i>
+                        </div>
+                        <span class="font-extrabold text-xl">Pawcare</span>
+                    </div>
+                    <p class="text-paw-gray text-sm leading-relaxed">
+                        We provide the best grooming services for your beloved pets. Professional care with love.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-paw-bg flex items-center justify-center text-paw-dark hover:bg-paw-orange hover:text-white transition"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-paw-bg flex items-center justify-center text-paw-dark hover:bg-paw-orange hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-paw-bg flex items-center justify-center text-paw-dark hover:bg-paw-orange hover:text-white transition"><i class="fa-brands fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <!-- Links -->
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Main pages</h4>
+                    <ul class="space-y-3 text-paw-gray">
+                        <li><a href="#" class="hover:text-paw-orange transition">Home</a></li>
+                        <li><a href="#" class="hover:text-paw-orange transition">About</a></li>
+                        <li><a href="#" class="hover:text-paw-orange transition">Services</a></li>
+                        <li><a href="#" class="hover:text-paw-orange transition">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Location 1 -->
+                <div>
+                    <h4 class="font-bold text-lg mb-6">San Francisco, CA</h4>
+                    <ul class="space-y-3 text-paw-gray text-sm">
+                        <li class="flex gap-3">
+                            <i class="fa-solid fa-location-dot text-paw-orange mt-1"></i>
+                            <span>Chattanooga St, San Francisco, CA 94114</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <i class="fa-solid fa-phone text-paw-orange mt-1"></i>
+                            <span>(415) 655 - 9116</span>
+                        </li>
+                         <li class="flex gap-3">
+                            <i class="fa-solid fa-clock text-paw-orange mt-1"></i>
+                            <span>Mon - Fri: 10am - 6pm</span>
+                        </li>
+                    </ul>
+                </div>
+
+                 <!-- Location 2 -->
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Los Angeles, CA</h4>
+                    <ul class="space-y-3 text-paw-gray text-sm">
+                        <li class="flex gap-3">
+                            <i class="fa-solid fa-location-dot text-paw-orange mt-1"></i>
+                            <span>1924 10th Ave, Los Angeles, CA 90018</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <i class="fa-solid fa-phone text-paw-orange mt-1"></i>
+                            <span>(358) 145 - 9371</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <i class="fa-solid fa-clock text-paw-orange mt-1"></i>
+                            <span>Mon - Fri: 10am - 6pm</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-paw-border pt-8 text-center text-paw-gray text-sm">
+                <p>Copyright © Pawcare | Designed by <span class="text-paw-dark font-bold">BRIX Templates</span> - Powered by <span class="text-paw-dark font-bold">Webflow</span></p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,143 @@
+:root {
+  --paw-orange: #3ac1f7;
+  --paw-orange-hover: #3fbef5;
+  --paw-bg: #FFFBF6;
+  --paw-dark: #1D1D1F;
+  --paw-gray: #666666;
+  --paw-light-gray: #F4F2ED;
+  --paw-border: #EAE8E3;
+
+  --font-sans: 'Manrope', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--paw-dark);
+  background-color: var(--paw-bg);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+/* Utilities */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 2rem;
+  }
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background-color: var(--paw-orange);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--paw-dark);
+}
+
+.btn-dark {
+  background-color: var(--paw-dark);
+  color: white;
+}
+
+.btn-dark:hover {
+  background-color: var(--paw-orange);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.text-orange {
+  color: var(--paw-orange);
+}
+
+.text-dark {
+  color: var(--paw-dark);
+}
+
+.text-gray {
+  color: var(--paw-gray);
+}
+
+.hover\:text-orange:hover {
+  color: var(--paw-orange);
+  transition: color 0.3s;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-extrabold {
+  font-weight: 800;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 40px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.blob-shape {
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  transition: all 0.5s ease;
+}
