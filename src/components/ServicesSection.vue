@@ -142,7 +142,7 @@
 
 <style scoped>
 .services-section {
-  padding: 8rem 0;
+  padding: 4rem 0; /* Reduced general padding */
   background-color: white;
   position: relative;
   overflow: hidden;
@@ -170,7 +170,7 @@
 }
 
 .section-title {
-  font-size: 2.5rem;
+  font-size: 2rem; /* Smaller mobile font */
   font-weight: 800;
   margin-bottom: 1.5rem;
   color: var(--paw-dark);
@@ -253,12 +253,24 @@
 
 /* Responsive */
 @media (min-width: 768px) {
+  .services-section {
+    padding: 6rem 0;
+  }
+  
   .services-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .section-title {
+    font-size: 2.5rem;
   }
 }
 
 @media (min-width: 1024px) {
+  .services-section {
+    padding: 8rem 0;
+  }
+
   .section-title {
     font-size: 3rem;
   }

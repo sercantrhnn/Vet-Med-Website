@@ -66,15 +66,15 @@
 
 <style scoped>
 .appointment-section {
-  padding: 6rem 0;
+  padding: 3rem 0; /* Reduced mobile padding */
   background-color: var(--paw-bg);
 }
 
 .appointment-box {
   background-color: var(--paw-dark);
   color: white;
-  border-radius: 2rem;
-  padding: 3rem;
+  border-radius: 1.5rem; /* Slightly smaller radius for mobile */
+  padding: 1.5rem; /* Reduced mobile padding */
   position: relative;
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0,0,0,0.1);
@@ -109,15 +109,15 @@
   z-index: 10;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 4rem;
+  gap: 3rem; /* Reduced gap */
   align-items: center;
 }
 
 /* Info Side */
 .section-title {
-  font-size: 3rem;
+  font-size: 2rem; /* Reduced mobile font size */
   font-weight: 800;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   line-height: 1.2;
 }
 
@@ -205,15 +205,17 @@
 .phone-link {
   display: inline-flex;
   align-items: center;
-  gap: 1rem;
-  font-size: 1.75rem;
+  gap: 0.5rem;
+  font-size: 1.25rem; /* Reduced mobile font size */
   font-weight: 800;
   color: var(--paw-dark);
-  padding: 1rem 2rem;
+  padding: 0.75rem 1.25rem; /* Reduced padding */
   background-color: var(--paw-bg);
   border-radius: 1rem;
   transition: all 0.3s;
   border: 2px solid transparent;
+  width: 100%; /* Full width on mobile often looks better */
+  justify-content: center;
 }
 
 .phone-link:hover {
@@ -245,13 +247,45 @@
   font-size: 0.9rem;
 }
 
+@media (min-width: 768px) {
+  .appointment-section {
+    padding: 6rem 0;
+  }
+  
+  .appointment-box {
+    border-radius: 2rem;
+    padding: 3rem;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+  }
+
+  .phone-link {
+    width: auto;
+    font-size: 1.5rem;
+    padding: 1rem 1.5rem;
+    gap: 1rem;
+  }
+}
+
 @media (min-width: 1024px) {
   .appointment-box {
     padding: 5rem;
   }
+  
+  .section-title {
+    font-size: 3rem;
+  }
+
   .grid-layout {
     grid-template-columns: 1fr 1fr;
     gap: 6rem;
+  }
+  
+  .phone-link {
+    font-size: 1.75rem;
+    padding: 1rem 2rem;
   }
 }
 </style>
